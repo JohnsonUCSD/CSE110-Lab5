@@ -8,7 +8,7 @@ function init() {
   const playButton = document.querySelector('button');
   const faceImage = document.querySelector('img');
 
-  // Load available voices from Mozilla 
+  // Load available voices (got code from Mozilla)
   const synth = window.speechSynthesis;
   let voices = [];
 
@@ -28,31 +28,32 @@ function init() {
       voiceSelect.appendChild(option);
     }
   }
-  
-  populateVoiceList();
   if (speechSynthesis.onvoiceschanged !== undefined) {
     speechSynthesis.onvoiceschanged = populateVoiceList;
   }
+  populateVoiceList();
 
   // Will text to speech when button is pressed
-  playButton.addEventListener(`click`, () => {
+  playButton.addEventListener('click', () => {
     const utterance = new SpeechSynthesisUtterance(textBox.value);
 
     // Set selected voice
-    const selectedVoiceName = voiceSelect.value;
+    const selectedOption = voiceSelect.selectedOptions[0];
+    const selectedVoiceName = selectedOption.getAttribute('data-name');
     const selectedVoice = voices.find(voice => voice.name === selectedVoiceName);
     if (selectedVoice) {
       utterance.voice = selectedVoice;
     }
-    
+
     // Open mouth smiley face when speaking
-    utterance.onstart = function() {
-      faceImage.src = 'assets/images/smiling-open.png'; 
-    };
+    utterance.addEventListener('start', () => {
+        faceImage.src = 'assets/images/smiling-open.png';
+      });
+
     // Change face image back after finish
-    utterance.onend = function() {
-      faceImage.src = 'assets/images/smiling.png';
-    };
+    utterance.addEventListener('end', () => {
+        faceImage.src = 'assets/images/smiling.png';
+      });
 
     speechSynthesis.speak(utterance);
   });
