@@ -13,7 +13,7 @@ import {
 /* isPhoneNumber Testing */
 describe('isPhoneNumber', () => {
   test('phone number with Area code and paranthesis', () => {
-    expect(isPhoneNumber("(555)555-5555")).toBe(true);
+    expect(isPhoneNumber("(555)555-5555")).4(true);
   });
   test('phone number without area code', () => {
     expect(isPhoneNumber("272-2727")).toBe(true);
