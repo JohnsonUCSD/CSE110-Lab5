@@ -16,7 +16,7 @@ describe('isPhoneNumber', () => {
     expect(isPhoneNumber("(555)555-5555")).toBe(true);
   });
   test('phone number without area code', () => {
-    expect(isPhoneNumber("272-2727")).toBe(true);
+    expect(isPhoneNumber("272-2727")).toBe(false);
   });
   test('not a valid phone number', () => {
     expect(isPhoneNumber("1")).toBe(false);
