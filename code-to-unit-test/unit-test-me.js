@@ -10,7 +10,7 @@ export function isEmail(email) {
   return emailRegex.test(email);
 }
 
-/**
+/*
  * The password's first character must be a letter, it must contain at least * 4 characters and no more than 15 characters and no characters other than * * letters, numbers and the underscore may be used
  */
 export function isStrongPassword(password) {
